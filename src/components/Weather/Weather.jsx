@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Whether = () => {
+const Weather = () => {
     return (
         <div>
 
@@ -8,5 +8,5 @@ const Whether = () => {
     )
 }
 
-export default Whether
+export default Weather
 ا
