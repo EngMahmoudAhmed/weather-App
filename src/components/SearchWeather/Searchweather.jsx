@@ -26,7 +26,7 @@ const Searchweather = () => {
 
 
     console.log(data);
-    
+
     if (data && data.weather && data.weather[0] && data.weather[0].main) {
         var main = data.weather[0].main;
         // Rest of your code here
@@ -34,7 +34,7 @@ const Searchweather = () => {
         // Handle the case when data or its properties are not defined
         // or when main is null or undefined
     }
-    
+
 
     let emoji = null;
 
@@ -63,7 +63,7 @@ const Searchweather = () => {
             <div>...Loading</div>
         )
     }
-    
+
     // let main= data?.weather[0]?.main;
     let temp = (data?.main?.temp - 273.15).toFixed(2)
     let temp_max = (data?.main?.temp_max - 273.15).toFixed(2)
@@ -74,7 +74,7 @@ const Searchweather = () => {
     let d = new Date();
     let date = d.getDate();
     let year = d.getFullYear();
-    let month = d.toLocaleString('default',{month:'long'});
+    let month = d.toLocaleString('default', { month: 'long' });
     let day = d.toLocaleString('default', { weekday: 'long' });
 
     // time
@@ -84,19 +84,19 @@ const Searchweather = () => {
         second: '2-digit'
     });
     return (
-        
+
         <div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-4">
                         <div className="card text-white text-center border-0">
-                            <img src={image1} className="card-img" height={600} alt="..." />
+                            <img src={image1} className="card-img" height={500} alt="..." />
                             <div className="card-img-overlay">
                                 <form>
                                     <div className="input-group mb-4 w-75 mx-auto">
                                         <input type="search" className="form-control" value={input} name='search'
-                                            placeholder="Seach City" aria-label="Search City" aria-describedby="basic-addon2"
-                                        onChange={(e)=>{setInput(e.target.value)}}/>
+                                            placeholder="Seach City" required aria-label="Search City" aria-describedby="basic-addon2"
+                                            onChange={(e) => { setInput(e.target.value) }} />
                                         <button type='submit' className="input-group-text" id="basic-addon2">
                                             <i className="fas fa-search"></i>
                                         </button>
@@ -104,12 +104,12 @@ const Searchweather = () => {
                                 </form>
                                 <div className="bg-dark bg-opacity-50 text-white">
                                     <h2 className="card-title py-3">{data.name}</h2>
-                                    <p className="card-text lead">{day}, {month} {date}, {year} </p>
-                                    {time}
+                                    <p className="card-text lead fw-bold">{day}, {month} {date}, {year} </p>
+                                    <h4>{time}</h4>
                                     <hr />
                                     <i className={`fas ${emoji} fa-4x`}></i>
-                                    <h1 className='fw-bolder mb-5'>{temp}&deg;C</h1>
-                                    <p className='fw-bolder lea mb-0'>{main}</p>
+                                    <h1 className='fw-bolder mb-2'>{temp}&deg;C</h1>
+                                    <p className='fw-bolder lead mb-0'>{main}</p>
                                     <p className='lead pb-5'>{temp_max}&deg;C | {temp_min}&deg;C</p>
                                 </div>
                             </div>
