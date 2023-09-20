@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import image1 from '../assets/image1.jpg'
 
 const Searchweather = () => {
-    const [search, setSearch] = useState('London');
+    const [search, setSearch] = useState('tokyo');
     const [data, setData] = useState([]);
     const [input, setInput] = useState('');
     let componentMonted = true;
@@ -10,17 +10,17 @@ const Searchweather = () => {
     useEffect(() => {
         const fetchWeather = async () => {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=8bc69c7d20c98ec4320b02ca2c334a54`)
-            setData(await response.json())
-            // if (componentMonted) {
-            // }
+            if (componentMonted) {
+                setData(await response.json())
+            }
 
-            // return () => {
-            //     componentMonted = false
-            // }
+            return () => {
+                componentMonted = false
+            }
         }
 
         fetchWeather();
-    }, []);
+    }, [search]);
 
 
 
@@ -83,20 +83,25 @@ const Searchweather = () => {
         minute: '2-digit',
         second: '2-digit'
     });
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setSearch(input)
+    }
     return (
 
         <div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-4">
+                    <div className="col-sm-7 col-md-6 col-lg-5">
                         <div className="card text-white text-center border-0">
                             <img src={image1} className="card-img" height={500} alt="..." />
                             <div className="card-img-overlay">
-                                <form>
+                                <form onSubmit={handleSubmit}>
                                     <div className="input-group mb-4 w-75 mx-auto">
                                         <input type="search" className="form-control" value={input} name='search'
                                             placeholder="Seach City" required aria-label="Search City" aria-describedby="basic-addon2"
-                                            onChange={(e) => { setInput(e.target.value) }} />
+                                            onChange={(e) =>  setInput(e.target.value) } />
                                         <button type='submit' className="input-group-text" id="basic-addon2">
                                             <i className="fas fa-search"></i>
                                         </button>
