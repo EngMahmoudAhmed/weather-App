@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import image1 from '../assets/image1.jpg'
 import Time_Date from '../Time_Date/Time_Date';
 import Photo from '../Photo/Photo';
 
@@ -25,7 +24,7 @@ const Searchweather = () => {
         fetchWeather();
     }, [search]);
 
-   
+
 
 
     let emoji = null;
@@ -63,63 +62,63 @@ const Searchweather = () => {
 
 
 
-if (data && data.weather && data.weather[0] && data.weather[0].main) {
-    var main = data.weather[0].main;
-    // Rest of your code here
-} else {
-    // Handle the case when data or its properties are not defined
-    // or when main is null or undefined
-}
-
-
-
-// let main= data?.weather[0]?.main;
-let temp = (data?.main?.temp - 273.15).toFixed(2)
-let temp_max = (data?.main?.temp_max - 273.15).toFixed(2)
-let temp_min = (data?.main?.temp_min - 273.15).toFixed(2)
-
-
-const handleSubmit = (event) => {
-    event.preventDefault();
-    setSearch(input)
+    if (data && data.weather && data.weather[0] && data.weather[0].main) {
+        var main = data.weather[0].main;
+        // Rest of your code here
+    } else {
+        // Handle the case when data or its properties are not defined
+        // or when main is null or undefined
     }
-    
 
-return (
 
-    <div>
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-sm-7 col-md-6 col-lg-5">
-                    <div className="card text-white text-center border-0">
-                        <Photo />
-                        <div className="card-img-overlay">
-                            <form onSubmit={handleSubmit}>
-                                <div className="input-group mb-4 w-75 mx-auto">
-                                    <input type="search" className="form-control" value={input} name='search'
-                                        placeholder="Seach City" required aria-label="Search City" aria-describedby="basic-addon2"
-                                        onChange={(e) => setInput(e.target.value)} />
-                                    <button type='submit' className="input-group-text" id="basic-addon2">
-                                        <i className="fas fa-search"></i>
-                                    </button>
+
+    // let main= data?.weather[0]?.main;
+    let temp = (data?.main?.temp - 273.15).toFixed(2)
+    let temp_max = (data?.main?.temp_max - 273.15).toFixed(2)
+    let temp_min = (data?.main?.temp_min - 273.15).toFixed(2)
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setSearch(input)
+    }
+
+
+    return (
+
+        <div>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-sm-7 col-md-6 col-lg-5">
+                        <div className="card text-white text-center border-0">
+                            <Photo />
+                            <div className="card-img-overlay">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="input-group mb-4 w-75 mx-auto">
+                                        <input type="search" className="form-control" value={input} name='search'
+                                            placeholder="Seach City" required aria-label="Search City" aria-describedby="basic-addon2"
+                                            onChange={(e) => setInput(e.target.value)} />
+                                        <button type='submit' className="input-group-text" id="basic-addon2">
+                                            <i className="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                                <div className="bg-dark bg-opacity-50 text-white">
+                                    <h2 className="card-title py-3">{data.name}</h2>
+                                    <Time_Date />
+                                    <hr />
+                                    <i className={`fas ${emoji} fa-4x`}></i>
+                                    <h1 className='fw-bolder mb-2'>{temp}&deg;C</h1>
+                                    <p className='fw-bolder lead mb-0'>{main}</p>
+                                    <p className='lead pb-5'>{temp_max}&deg;C | {temp_min}&deg;C</p>
                                 </div>
-                            </form>
-                            <div className="bg-dark bg-opacity-50 text-white">
-                                <h2 className="card-title py-3">{data.name}</h2>
-                                <Time_Date />
-                                <hr />
-                                <i className={`fas ${emoji} fa-4x`}></i>
-                                <h1 className='fw-bolder mb-2'>{temp}&deg;C</h1>
-                                <p className='fw-bolder lead mb-0'>{main}</p>
-                                <p className='lead pb-5'>{temp_max}&deg;C | {temp_min}&deg;C</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-)
+    )
 }
 
 export default Searchweather
