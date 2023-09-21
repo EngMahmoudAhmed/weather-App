@@ -24,17 +24,19 @@ const Searchweather = () => {
     }, [search]);
 
     useEffect(() => {
+        const clientApi = `rl1w01G1yNj20X17q4YuDCudXAN8T64jN6FicS9925I`;
         const unsplash_Api = async () => {
-            const response_2 = await fetch(`https://api.unsplash.com/photos/?client_id=rl1w01G1yNj20X17q4YuDCudXAN8T64jN6FicS9925I`)
+            const response_2 = await fetch(`https://api.unsplash.com/photos/?client_id=${clientApi}`)
                 setUnsplashApi(await response_2.json())
-            const self = (unsplashApi[0]?.links?.self);
         }
 
         unsplash_Api();
-    },[])
+    }, [])
+    
+    let image = unsplashApi[0]?.urls?.regular;
+    // console.log(unsplashApi);
 
 
-console.log(self);
 
 
 if (data && data.weather && data.weather[0] && data.weather[0].main) {
@@ -72,7 +74,7 @@ else {
     return (
         <div className='container'>
             <div className="d-flex align-items-center justify-content-center vh-100 fw-bold fs-1">
-                404
+                <i className='fa-solid fa-spinner fa-spin fa-2x'></i>
             </div>
         </div>
     )
@@ -87,7 +89,9 @@ let temp_min = (data?.main?.temp_min - 273.15).toFixed(2)
 const handleSubmit = (event) => {
     event.preventDefault();
     setSearch(input)
-}
+    }
+    
+
 return (
 
     <div>
@@ -95,7 +99,7 @@ return (
             <div className="row justify-content-center">
                 <div className="col-sm-7 col-md-6 col-lg-5">
                     <div className="card text-white text-center border-0">
-                        <img src={self} className="card-img" height={500} alt="..." />
+                        <img src={image} className="card-img" height={500} alt="..." />
                         <div className="card-img-overlay">
                             <form onSubmit={handleSubmit}>
                                 <div className="input-group mb-4 w-75 mx-auto">
