@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import image1 from '../assets/image1.jpg'
-
+import Time_Date from '../Time_Date/Time_Date';
 const Searchweather = () => {
     const [search, setSearch] = useState('tokyo');
     const [data, setData] = useState([]);
@@ -70,7 +70,11 @@ if (typeof data.main != 'undefined') {
 }
 else {
     return (
-        <div>...Loading</div>
+        <div className='container'>
+            <div className="d-flex align-items-center justify-content-center vh-100 fw-bold fs-1">
+                404
+            </div>
+        </div>
     )
 }
 
@@ -79,20 +83,6 @@ let temp = (data?.main?.temp - 273.15).toFixed(2)
 let temp_max = (data?.main?.temp_max - 273.15).toFixed(2)
 let temp_min = (data?.main?.temp_min - 273.15).toFixed(2)
 
-
-// date
-let d = new Date();
-let date = d.getDate();
-let year = d.getFullYear();
-let month = d.toLocaleString('default', { month: 'long' });
-let day = d.toLocaleString('default', { weekday: 'long' });
-
-// time
-let time = d.toLocaleString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-});
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -119,8 +109,7 @@ return (
                             </form>
                             <div className="bg-dark bg-opacity-50 text-white">
                                 <h2 className="card-title py-3">{data.name}</h2>
-                                <p className="card-text lead fw-bold">{day}, {month} {date}, {year} </p>
-                                <h4>{time}</h4>
+                                <Time_Date />
                                 <hr />
                                 <i className={`fas ${emoji} fa-4x`}></i>
                                 <h1 className='fw-bolder mb-2'>{temp}&deg;C</h1>
