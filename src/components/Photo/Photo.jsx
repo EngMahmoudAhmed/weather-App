@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import React from 'react'
-
+let componentMonted = true;
 const Photo = () => {
     const [unsplashApi, setUnsplashApi] = useState([])
 
@@ -8,7 +8,12 @@ const Photo = () => {
         const clientApi = `rl1w01G1yNj20X17q4YuDCudXAN8T64jN6FicS9925I`;
         const unsplash_Api = async () => {
             const response_2 = await fetch(`https://api.unsplash.com/photos/?client_id=${clientApi}`)
-            setUnsplashApi(await response_2.json())
+            if (componentMonted) {
+                setUnsplashApi(await response_2.json())
+            }
+            return () => {
+                componentMonted = false;
+            }
         }
 
         unsplash_Api();
